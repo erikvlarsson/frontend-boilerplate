@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import UserService from "../../Shared/UserService";
 
-export default function Login({ goToSignup, login }) {
+export default function Login({ goToSignup, setAuth }) {
+  const userService = new UserService();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -8,8 +10,11 @@ export default function Login({ goToSignup, login }) {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    login(userData);
-    alert("logged in!");
+    userService.authenticate(userData).then((response) => {
+      if (response === true) {
+        setAuth(true);
+      }
+    });
   };
 
   const handleWrite = (event) => {

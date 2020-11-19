@@ -1,18 +1,23 @@
 import React, { useState } from "react";
-import Json from "../../Components/Json";
-const className = "margin-5 padding-10";
+import StateViewer from "../../Components/StateViewer";
+import UserService from "../../Shared/UserService";
 
-export default function Signup({ goToLogin, register }) {
+export default function Signup({ goToLogin }) {
+  const userService = new UserService();
   const [userData, setUserData] = useState({
     name: "",
-    email: "e",
+    email: "",
     password: "",
   });
-  const [response, setResponse] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSignup = (event) => {
     event.preventDefault();
-    register(userData);
+    userService.register(userData).then((response) => {
+      //response will be either true or false (see userService.register)
+      if (response) {
+        alert("SUCCESSFUL REGISTRATION.");
+      }
+    });
   };
 
   const handleWrite = (event) => {
@@ -22,11 +27,20 @@ export default function Signup({ goToLogin, register }) {
     });
   };
 
+  const className = "margin-5 padding-10";
+
   return (
     <div>
       <h1>Sign Up</h1>
-      <Json data={userData} />
-      <form method="POST" onSubmit={handleSubmit}>
+      <StateViewer state={userData} />
+      <form method="POST" onSubmit={handleSignup}>
+        <input
+          type="text"
+          name="name"
+          placeholder="name"
+          className={className}
+          onChange={handleWrite}
+        />
         <input
           type="text"
           name="email"

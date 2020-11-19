@@ -7,9 +7,9 @@ import "./Styles/Buttons.css";
 function App() {
   const [auth, setAuth] = useState(false);
 
-  useEffect(() => {
-    return () => {};
-  }, []);
+  // useEffect(() => {
+  //   return () => {};
+  // }, []);
 
   return (
     <div className="App">

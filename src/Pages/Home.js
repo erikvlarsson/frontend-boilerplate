@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Shared/UserService";
-import Json from "../Components/Json";
+import StateViewer from "../Components/StateViewer";
 import Api from "../Shared/Api";
 import UserService from "../Shared/UserService";
 
@@ -10,7 +10,7 @@ export default function Home() {
 
   useEffect(() => {
     userService.getUsers().then((response) => {
-      setUsers(response);
+      setUsers(response.data);
     });
     return () => {};
   }, []);
@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <div>
       <h1>Home.js</h1>
-      {users ? <Json data={users} /> : null}
+      {users ? <StateViewer state={users} /> : null}
     </div>
   );
 }

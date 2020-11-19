@@ -1,10 +1,21 @@
 import Connection from "./Api";
 
 class UserService {
-  async register(user) {
+  async register(userData) {
+    let res = false;
+    await Connection.post("/register", userData).then((response) => {
+      if (response.status === 201) {
+        res = true;
+      }
+    });
+    return res;
+  }
+
+  async authenticate(userData) {
     let res = null;
-    await Connection.post("/register", user).then((response) => {
-      res = response;
+    await Connection.post("/authenticate", userData).then((response) => {
+      // evaluates to true if user authenticated
+      res = response.data;
     });
     return res;
   }
