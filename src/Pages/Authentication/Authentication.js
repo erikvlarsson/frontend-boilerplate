@@ -6,7 +6,7 @@ export default function Authentication({ setAuth }) {
   const [isSignupMode, setSignupMode] = useState(false);
 
   if (isSignupMode) {
-    return <Signup goToLogin={() => setSignupMode(false)} />;
+    return <Signup goToLogin={() => setSignupMode(false)} setAuth={setAuth} />;
   } else {
     return <Login goToSignup={() => setSignupMode(true)} setAuth={setAuth} />;
   }

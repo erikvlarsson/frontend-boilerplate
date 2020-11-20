@@ -1,20 +1,34 @@
 import React, { useState } from "react";
 import UserService from "../../Shared/UserService";
+import Status from "../../Components/Status";
 
 export default function Login({ goToSignup, setAuth }) {
   const userService = new UserService();
+  const [statusCode, setStatusCode] = useState(200);
   const [userData, setUserData] = useState({
-    email: "",
+    email: localStorage.email,
     password: "",
   });
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-    userService.authenticate(userData).then((response) => {
-      if (response === true) {
-        setAuth(true);
-      }
-    });
+    if (!(userData.password.length > 0 && userData.email.length > 0)) {
+      alert("Please enter both fields.");
+    } else {
+      await userService.login(userData).then((responseCode) => {
+        // setStatusCode(responseCode);
+        if (responseCode === 200) {
+          setAuth(true);
+          alert("Welcome!");
+        } else if (responseCode === 401) {
+          alert("Wrong password!");
+        } else if (responseCode === 403) {
+          alert("No user with that email!");
+        } else {
+          alert("FUCK YOU!");
+        }
+      });
+    }
   };
 
   const handleWrite = (event) => {
@@ -29,18 +43,23 @@ export default function Login({ goToSignup, setAuth }) {
   return (
     <div>
       <h1>Log in</h1>
+      <Status statusCode={statusCode} />
+
       <form onSubmit={handleLogin}>
         <input
           type="text"
           name="email"
-          placeholder="email"
+          placeholder="Email"
+          value={userData.email}
+          autoComplete="off"
           className={className}
           onChange={handleWrite}
         />
         <input
-          type="text"
+          type="password"
           name="password"
-          placeholder="password"
+          placeholder="Password"
+          autoComplete="off"
           className={className}
           onChange={handleWrite}
         />

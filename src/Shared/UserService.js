@@ -1,28 +1,51 @@
-import Connection from "./Api";
+import Api from "./Api";
 
 class UserService {
   async register(userData) {
-    let res = false;
-    await Connection.post("/register", userData).then((response) => {
+    let registered = false;
+    await Api.post("/register", userData).then((response) => {
       if (response.status === 201) {
-        res = true;
+        registered = true;
       }
     });
-    return res;
+    return registered;
   }
 
-  async authenticate(userData) {
-    let res = null;
-    await Connection.post("/authenticate", userData).then((response) => {
-      // evaluates to true if user authenticated
-      res = response.data;
+  async authorize() {
+    let authorized = null;
+    await Api.post(
+      "/authorize",
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.access_token, //the token is a variable which holds the token
+        },
+      }
+    ).then((response) => {
+      authorized = response.status;
     });
-    return res;
+    return authorized;
+  }
+
+  async login(userData) {
+    let authorized = null;
+    await Api.post("/login", userData)
+      .then((response) => {
+        if (response.status === 200) {
+          authorized = response.status;
+          localStorage.access_token = response.data.access_token;
+          localStorage.email = userData.email;
+        }
+      })
+      .catch((error) => {
+        authorized = error.response.status;
+      });
+    return authorized;
   }
 
   async getUsers() {
     let res = null;
-    await Connection.get("/users").then((response) => {
+    await Api.get("/users").then((response) => {
       res = response;
     });
     return res;

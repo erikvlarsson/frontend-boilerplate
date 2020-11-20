@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import StateViewer from "../../Components/StateViewer";
+import Data from "../../Components/Data";
 import UserService from "../../Shared/UserService";
 
-export default function Signup({ goToLogin }) {
+export default function Signup({ goToLogin, setAuth }) {
   const userService = new UserService();
   const [userData, setUserData] = useState({
     name: "",
@@ -12,10 +12,11 @@ export default function Signup({ goToLogin }) {
 
   const handleSignup = (event) => {
     event.preventDefault();
-    userService.register(userData).then((response) => {
-      //response will be either true or false (see userService.register)
-      if (response) {
-        alert("SUCCESSFUL REGISTRATION.");
+    userService.register(userData).then((registered) => {
+      if (registered) {
+        localStorage.email = userData.email;
+        goToLogin();
+        // setAuth(true);
       }
     });
   };
@@ -32,12 +33,13 @@ export default function Signup({ goToLogin }) {
   return (
     <div>
       <h1>Sign Up</h1>
-      <StateViewer state={userData} />
+      <Data data={userData} />
       <form method="POST" onSubmit={handleSignup}>
         <input
           type="text"
           name="name"
           placeholder="name"
+          autoComplete="off"
           className={className}
           onChange={handleWrite}
         />
@@ -45,6 +47,7 @@ export default function Signup({ goToLogin }) {
           type="text"
           name="email"
           placeholder="email"
+          autoComplete="off"
           className={className}
           onChange={handleWrite}
         />
@@ -52,6 +55,7 @@ export default function Signup({ goToLogin }) {
           type="text"
           name="password"
           placeholder="password"
+          autoComplete="off"
           className={className}
           onChange={handleWrite}
         />
