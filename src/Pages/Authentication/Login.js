@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import UserService from "../../Shared/UserService";
-import Status from "../../Components/Status";
+import toast from "../../Components/Alert/Toast";
+import { AuthContext } from "../../Contexts/AuthContext";
 
-export default function Login({ goToSignup, setAuth }) {
+export default function Login({ goToSignup }) {
+  const { setAuth } = useContext(AuthContext);
+
   const userService = new UserService();
-  const [statusCode, setStatusCode] = useState(200);
   const [userData, setUserData] = useState({
     email: localStorage.email,
     password: "",
@@ -13,19 +15,18 @@ export default function Login({ goToSignup, setAuth }) {
   const handleLogin = async (event) => {
     event.preventDefault();
     if (!(userData.password.length > 0 && userData.email.length > 0)) {
-      alert("Please enter both fields.");
+      toast(400, "Please enter both fields.");
     } else {
-      await userService.login(userData).then((responseCode) => {
-        // setStatusCode(responseCode);
-        if (responseCode === 200) {
+      await userService.login(userData).then((response) => {
+        if (response === 200) {
+          toast(200, response);
           setAuth(true);
-          alert("Welcome!");
-        } else if (responseCode === 401) {
-          alert("Wrong password!");
-        } else if (responseCode === 403) {
-          alert("No user with that email!");
+        } else if (response === 401) {
+          toast(401, "Wrong password.");
+        } else if (response === 403) {
+          toast(403, "No user with that email.");
         } else {
-          alert("FUCK YOU!");
+          toast(400, "Unkown error.");
         }
       });
     }
@@ -43,8 +44,6 @@ export default function Login({ goToSignup, setAuth }) {
   return (
     <div>
       <h1>Log in</h1>
-      <Status statusCode={statusCode} />
-
       <form onSubmit={handleLogin}>
         <input
           type="text"
@@ -63,10 +62,18 @@ export default function Login({ goToSignup, setAuth }) {
           className={className}
           onChange={handleWrite}
         />
-        <button type="submit" className={className + " submitButton"}>
+        <button type="submit" className={className + " purpleButton"}>
           Log in
         </button>
-        <button onClick={goToSignup} className={className}>
+        <div className={className} style={{ textAlign: "center" }}>
+          Forgot your password?
+        </div>
+        <hr style={{ width: "100%" }} />
+        <button
+          onClick={goToSignup}
+          style={{ width: "70%", alignSelf: "center" }}
+          className={className + " greenButton"}
+        >
           Sign up
         </button>
       </form>

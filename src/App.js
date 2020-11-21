@@ -1,30 +1,15 @@
-import { useEffect, useState } from "react";
-import UserService from "./Shared/UserService";
-import Authentication from "./Pages/Authentication/Authentication";
-import Status from "./Components/Status";
-import Routes from "./Routes";
+import React from "react";
+import { AuthContextProvider } from "./Contexts/AuthContext";
+import AppMain from "./AppMain";
 import "./App.css";
 import "./Styles/Buttons.css";
+import "./Styles/Inputs.css";
 
 function App() {
-  const [auth, setAuth] = useState(false);
-  const [status, setStatus] = useState(false);
-  const userService = new UserService();
-
-  useEffect(() => {
-    userService.authorize().then((statusCode) => {
-      alert(statusCode);
-      setStatus(statusCode);
-      // setAuth(statusCode === 200);
-    });
-    return () => {};
-  }, []);
-
   return (
-    <div className="App">
-      {auth ? <Routes /> : <Authentication setAuth={setAuth} />}
-      <Status statusCode={status} />
-    </div>
+    <AuthContextProvider>
+      <AppMain />
+    </AuthContextProvider>
   );
 }
 

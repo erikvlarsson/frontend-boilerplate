@@ -5,6 +5,7 @@
   justify-content: center;
   min-height: 100vh;
   width: 100%;
+  background: #282c34;
 }
 
 form {
@@ -19,4 +20,59 @@ form {
 
 .margin-5 {
   margin: 5px;
+}
+
+hr {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+}
+
+.display {
+  box-shadow: 0 0 10px red;
+  border: 2px solid red;
+  opacity: 0;
+}
+
+#bottomNav {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  /* width: 100%; */
+  background: linear-gradient(white, silver);
+  padding: 0 50px;
+  color: #333;
+}
+
+#bottomNav input[type="text"] {
+  /* background: #eee; */
+  background: none;
+  padding: 10px 10px;
+  border-radius: 5px;
+  border: 1px solid #333;
+  outline: none;
+  transition: all 0.2s;
+}
+#bottomNav input[type="text"]:focus {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.navButton {
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.navButton:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+#bottomNav .navButton {
+  font-size: 30px;
 }

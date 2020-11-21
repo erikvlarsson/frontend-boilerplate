@@ -1,6 +1,12 @@
 import React from "react";
 import Data from "../Components/Data";
+import BottomNav from "../Components/BottomNav";
 
 export default function Home() {
-  return <Data data={localStorage} />;
+  return (
+    <div>
+      <Data data={localStorage} />
+      <BottomNav />
+    </div>
+  );
 }

@@ -1,16 +1,59 @@
 button {
+  position: relative;
   font-weight: 600;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   outline: none;
   opacity: 1;
+  padding: 10px 15px;
+  transition: all 5ms;
+  text-shadow: 0 -0.5px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0.5px 1.5px rgba(0, 0, 0, 0.9),
+    inset 0 1px 1px -1px rgba(255, 255, 255, 0.6),
+    inset 0 -1px 1px -1px rgb(0, 0, 0, 0.6);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+  font-size: 14px;
 }
 
-.submitButton {
-  background: linear-gradient(10deg, rgb(124, 59, 185), rgb(101, 87, 255));
-  box-shadow: inset 0 2px 5px rgba(101, 87, 255, 0.7),
-    inset 0 -2px 6px rgba(124, 59, 185, 0.7);
-  margin-bottom: 50px;
+button:active {
+  transform: scale(1) translateY(-0.5px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  margin-top: 6px;
+  box-shadow: 0 0.5px 1.5px rgba(0, 0, 0, 0.9),
+    inset 0 1px 1px -1px rgba(255, 255, 255, 0.9);
+}
+
+.button::after {
+  position: absolute;
+  z-index: 500;
+  height: 100px;
+  width: 100%;
+  background: red;
+  box-shadow: 0 9px #999;
+}
+
+.purpleButton {
+  background: rgb(73, 115, 204);
   color: white;
+}
+
+.greenButton {
+  background: rgb(52, 131, 118);
+  color: white;
+}
+
+.whiteButton {
+  background: linear-gradient(white, rgb(177, 177, 190));
+  color: #111;
+  text-shadow: 0 0.5px white;
+}
+
+.iconButton {
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.iconButton:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.1);
 }

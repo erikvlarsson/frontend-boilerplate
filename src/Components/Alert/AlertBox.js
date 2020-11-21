@@ -1,22 +1,61 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import "./Alert.css";
+import { GrClose } from "react-icons/gr";
 
-export default function Status({ statusCode }) {
+export default function AlertBox({
+  id,
+  statusCode,
+  message = null,
+  hideAlert,
+  duration,
+}) {
+  const [opacity, setOpacity] = useState(1);
+  const [hasLoaded, setHasLoaded] = useState(true);
+  useEffect(() => {
+    if (hasLoaded) {
+      setTimeout(() => {
+        setOpacity(0);
+      }, duration - 1000);
+    }
+    return () => {
+      setHasLoaded(false);
+    };
+  }, []);
+
+  let msg = message;
+  if (!message) {
+    msg = statusCodes[statusCode];
+  }
+  let statusIcon = "⚠️";
+  if (statusCode > 300) {
+    statusIcon = "⛔️";
+  } else if (statusCode < 300) {
+    statusIcon = "✅";
+  }
   return (
-    <div
-      style={{
-        position: "fixed",
-        right: "20px",
-        top: "5px",
-        margin: "5px",
-        border: "1px solid rgba(255,255,255,0.1)",
-        borderRadius: "5px",
-        background: "rgba(255,255,255,0.1)",
-        padding: "10px 20px",
-        textAlign: "right",
-      }}
-    >
-      <h3 style={{ margin: 0 }}>{statusCode}</h3>
-      <h6 style={{ margin: 0 }}>{statusCodes[statusCode]}</h6>
+    <div id={id} className={"alertBox"} style={{ opacity: opacity }}>
+      <div
+        style={{
+          marginRight: "18px",
+          fontSize: "20px",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        {statusIcon}
+      </div>
+      <div
+        style={{ marginRight: "10px", display: "flex", alignItems: "center" }}
+      >
+        {statusCode}: {message}
+      </div>
+      <div
+        className="iconButton"
+        onClick={hideAlert}
+        style={{ fontWeight: 400, display: "flex", alignItems: "center" }}
+      >
+        <GrClose />
+      </div>
     </div>
   );
 }

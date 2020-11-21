@@ -1,11 +1,7 @@
 import axios from "axios";
 
-const token =
-  "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktXdkw0amMxQ0dRLUNvc0stYjhzQiJ9.eyJpc3MiOiJodHRwczovL2Rldi1tcjR1OGFtMy5ldS5hdXRoMC5jb20vIiwic3ViIjoiNm5UbXIwa1Uyb0pOdjJKdHd1RWwyMzRFVzN0VXVEbGRAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vY2VsbHNvbGFyLWRldi5henVyZXdlYnNpdGVzLm5ldC8iLCJpYXQiOjE2MDU2MTYyMTYsImV4cCI6MTYwNTcwMjYxNiwiYXpwIjoiNm5UbXIwa1Uyb0pOdjJKdHd1RWwyMzRFVzN0VXVEbGQiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.xNN6DmfGGc290gE1lw4Vnmur9RilG7SdcadBVX_kzOzTdRDQf2U200um1gAViLjs5IGrVxsTEP_BVKk4yOXgtkYvBLBnn88_YddS8c-7Gkx84pMUhtNV_JIUDMcMKXIyZEfin9fpx1LL-tDpt6DWew3xbRuPuGcbkCrfFOIVXg9kiJgn1ms60Iok_YGBA-ONBaWXgcxYRkn_QaNMwt89SgUuLgmLR1sd78PWJiXxXzwNeMTAzcfbGJnfYtjpr1X-RZLqLhIiUAi2PiYUfshpkPxTFZrcW2Ch49M3WW9YinUf3ewlrzOAQhh7VlDO7yLj6Il_DKQYCPTws5i_5Lv6zw";
-
 const service = axios.create({
   baseURL: "http://localhost:5000/",
-  // headers: { Authorization: `bearer ${token}` },
 });
 
 export default service;

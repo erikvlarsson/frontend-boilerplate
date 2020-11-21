@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import Login from "./Login";
 import Signup from "./Signup";
 
-export default function Authentication({ setAuth }) {
+export default function Authentication() {
   const [isSignupMode, setSignupMode] = useState(false);
 
   if (isSignupMode) {
-    return <Signup goToLogin={() => setSignupMode(false)} setAuth={setAuth} />;
+    return <Signup goToLogin={() => setSignupMode(false)} />;
   } else {
-    return <Login goToSignup={() => setSignupMode(true)} setAuth={setAuth} />;
+    return <Login goToSignup={() => setSignupMode(true)} />;
   }
 }

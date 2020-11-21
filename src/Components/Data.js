@@ -2,8 +2,8 @@ import React from "react";
 
 export default function DataDiv({ data }) {
   let dataArr = JSON.stringify(data).split(",");
-  let lines = dataArr.map((line) => {
-    return <div>{line}</div>;
+  let lines = dataArr.map((line, i) => {
+    return <div key={i}>{line}</div>;
   });
 
   return (
