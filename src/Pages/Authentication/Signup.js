@@ -49,55 +49,58 @@ export default function Signup({ goToLogin }) {
 
   return (
     <>
-      {loading ? <Spinner /> : null}
-      <div>
-        <h1>Sign Up</h1>
-        <form method="POST" onSubmit={handleSignup}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            autoComplete="off"
-            className={className}
-            onChange={handleWrite}
-          />
-          <input
-            type="text"
-            name="email"
-            placeholder="Email"
-            autoComplete="off"
-            className={className}
-            onChange={handleWrite}
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            autoComplete="off"
-            className={className}
-            onChange={handleWrite}
-          />
-          <button type="submit" className={className + " greenButton"}>
-            Sign Up
-          </button>
-          <div
-            className={className}
-            style={{ textAlign: "center" }}
-            onClick={goToLogin}
-          >
-            Already a member?{" "}
-            <span
-              style={{
-                padding: 5,
-                cursor: "pointer",
-                color: "rgb(93, 145, 255)",
-              }}
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div>
+          <h1>Sign Up</h1>
+          <form method="POST" onSubmit={handleSignup}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              autoComplete="off"
+              className={className}
+              onChange={handleWrite}
+            />
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
+              autoComplete="off"
+              className={className}
+              onChange={handleWrite}
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              autoComplete="off"
+              className={className}
+              onChange={handleWrite}
+            />
+            <button type="submit" className={className + " greenButton"}>
+              Sign Up
+            </button>
+            <div
+              className={className}
+              style={{ textAlign: "center" }}
+              onClick={goToLogin}
             >
-              Login
-            </span>
-          </div>
-        </form>
-      </div>
+              Already a member?{" "}
+              <span
+                style={{
+                  padding: 5,
+                  cursor: "pointer",
+                  color: "rgb(93, 145, 255)",
+                }}
+              >
+                Login
+              </span>
+            </div>
+          </form>
+        </div>
+      )}
     </>
   );
 }

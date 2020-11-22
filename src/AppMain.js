@@ -11,8 +11,10 @@ function AppMain() {
   useEffect(() => {
     if (!hasLoaded) {
       const userService = new UserService();
-      userService.renewTokens().then((result) => {
-        alert(JSON.stringify(result));
+      userService.getRefreshToken().then((result) => {
+        if (result === 201) {
+          setAuth(true);
+        }
         setHasLoaded(true);
       });
     }

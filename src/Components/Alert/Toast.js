@@ -5,6 +5,7 @@ import AlertBox from "./AlertBox";
 export default function alertBox(statusCode = 200, message, duration = 6000) {
   try {
     const alertContainer = document.getElementById("alert");
+    unmountComponentAtNode(document.getElementById("alert"));
     if (alertContainer) {
       let semiRandomId = `${Math.random()}-${Math.random()}-${Math.random()}`;
       render(
@@ -28,5 +29,7 @@ export default function alertBox(statusCode = 200, message, duration = 6000) {
 
 const hideAlert = (id) => {
   const alertBox = document.getElementById(id);
-  if (alertBox) unmountComponentAtNode(document.getElementById("alert"));
+  if (alertBox) {
+    unmountComponentAtNode(document.getElementById("alert"));
+  }
 };

@@ -27,6 +27,8 @@ export default function DataDiv({ data }) {
       }}
     >
       {lines}
+      <div>accessToken: ...{sessionStorage.accessToken.slice(-12)}</div>
+      <div>refreshToken: ...{localStorage.refreshToken.slice(-12)}</div>
     </div>
   );
 }

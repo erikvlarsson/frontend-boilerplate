@@ -42,21 +42,21 @@ class UserService {
       {},
       {
         headers: {
-          refreshToken: "Bearer " + localStorage.refreshToken,
+          Authorization: "Bearer " + localStorage.refreshToken,
         },
       }
     )
       .then((response) => {
         if (response.status === 201) {
           result = 201;
-          localStorage.accessToken = response.data.accessToken;
+          sessionStorage.accessToken = response.data.accessToken;
           localStorage.refreshToken = response.data.refreshToken;
         } else {
           result = response.status;
         }
       })
       .catch((error) => {
-        result = error.response.status;
+        result = 401;
       });
     return result;
   }
