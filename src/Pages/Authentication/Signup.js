@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react";
-import Data from "../../Components/Data";
-import Spinner from "../../Components/Spinner/Spinner";
+import React, { useState, useContext, useEffect } from "react";
+import LoadingScreen from "../../Components/Loading/LoadingScreen";
 import UserService from "../../Shared/UserService";
-import toast from "../../Components/Alert/Toast";
+import { toast } from "../../Components/Alert/Toast";
 import { AuthContext } from "../../Contexts/AuthContext";
 
 export default function Signup({ goToLogin }) {
@@ -14,10 +13,13 @@ export default function Signup({ goToLogin }) {
     password: "",
   });
 
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   const userService = new UserService();
   const handleSignup = (event) => {
     event.preventDefault();
-    setLoading(true);
     if (
       !(
         userData.password.length > 0 &&
@@ -27,11 +29,13 @@ export default function Signup({ goToLogin }) {
     ) {
       toast(400, "Please enter all fields.");
     } else {
-      userService.signup(userData).then((response) => {
-        if (response === 201) {
+      userService.signup(userData).then((registered) => {
+        if (registered) {
+          setLoading(true);
           setTimeout(() => {
+            setLoading(false);
             setAuth(true);
-          }, 2000);
+          }, 1500);
         }
       });
     }
@@ -50,7 +54,7 @@ export default function Signup({ goToLogin }) {
   return (
     <>
       {loading ? (
-        <Spinner />
+        <LoadingScreen />
       ) : (
         <div>
           <h1>Sign Up</h1>

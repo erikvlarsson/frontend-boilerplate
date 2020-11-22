@@ -2,41 +2,41 @@ import Api from "./Api";
 
 class UserService {
   async signup(userData) {
-    let res = null;
+    let auth = null;
     await Api.post("/signup", userData)
       .then((response) => {
         if (response.status === 201) {
           sessionStorage.accessToken = response.data.accessToken;
           localStorage.refreshToken = response.data.refreshToken;
           localStorage.email = userData.email;
-          res = 201;
+          auth = true;
         }
       })
       .catch((error) => {
-        res = error;
+        console.log(error);
       });
-    return res;
+    return auth;
   }
 
   async login(userData) {
-    let res = null;
+    let auth = false;
     await Api.post("/login", userData)
       .then((response) => {
         if (response.status === 200) {
-          res = 200;
+          auth = true;
           sessionStorage.accessToken = response.data.accessToken;
           localStorage.refreshToken = response.data.refreshToken;
           localStorage.email = userData.email;
         }
       })
       .catch((error) => {
-        res = error.response.status;
+        console.log(error);
       });
-    return res;
+    return auth;
   }
 
   async getRefreshToken() {
-    let result = null;
+    let auth = null;
     await Api.post(
       "/getRefreshToken",
       {},
@@ -48,21 +48,19 @@ class UserService {
     )
       .then((response) => {
         if (response.status === 201) {
-          result = 201;
           sessionStorage.accessToken = response.data.accessToken;
           localStorage.refreshToken = response.data.refreshToken;
-        } else {
-          result = response.status;
+          auth = true;
         }
       })
       .catch((error) => {
-        result = 401;
+        console.log(error);
       });
-    return result;
+    return auth;
   }
 
   async getAccessToken() {
-    let result = null;
+    let auth = null;
     await Api.post(
       "/getAccessToken",
       {},
@@ -74,15 +72,14 @@ class UserService {
     )
       .then((response) => {
         if (response.status === 201) {
-          result = 201;
           sessionStorage.accessToken = response.data.accessToken;
+          auth = true;
         }
       })
       .catch((error) => {
-        result = error.response.status;
         console.log(error);
       });
-    return result;
+    return auth;
   }
 }
 

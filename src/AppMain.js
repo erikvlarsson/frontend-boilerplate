@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import UserService from "./Shared/UserService";
 import Routes from "./Routes";
-import Spinner from "./Components/Spinner/Spinner";
+import LoadingScreen from "./Components/Loading/LoadingScreen";
 import { AuthContext } from "./Contexts/AuthContext";
 
 function AppMain() {
@@ -11,25 +11,26 @@ function AppMain() {
   useEffect(() => {
     if (!hasLoaded) {
       const userService = new UserService();
-      userService.getRefreshToken().then((result) => {
-        if (result === 201) {
           setAuth(true);
-        }
-        setHasLoaded(true);
+      userService.getRefreshToken().then((auth) => {
+        setAuth(auth).then(() => {
+          if (auth) {
+            setTimeout(() => setHasLoaded(true), 1500);
+          } else {
+            setHasLoaded(true);
+          }
+        });
       });
     }
-  }, [hasLoaded, setAuth]);
+  }, [hasLoaded, setAuth, setHasLoaded]);
 
   if (!hasLoaded) {
-    return <Spinner />;
+    return <LoadingScreen />;
   } else {
     return (
       <div className="App">
-        <Routes auth={auth} />
-        <div
-          id="alert"
-          style={{ width: "100%", display: "flex", justifyContent: "center" }}
-        />
+        <Routes auth={auth} hasLoaded={hasLoaded} />
+        <div id="alert" />
       </div>
     );
   }

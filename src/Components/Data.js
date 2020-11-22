@@ -12,8 +12,8 @@ export default function DataDiv({ data }) {
         borderRadius: "5px",
         padding: "10px 20px",
         margin: "5px 0",
-        width: "90%",
-        maxWidth: "900px",
+        width: "400px",
+        maxWidth: "90%",
         background: "rgba(255,255,255,0.05)",
         border: "2px solid rgba(255,255,255,0.05)",
         color: "rgb(200,200,200)",
@@ -21,14 +21,20 @@ export default function DataDiv({ data }) {
         letterSpacing: "1.5px",
         lineHeight: "25px",
         fontWeight: 400,
-        overflowWrap: "break-word",
+        // overflowWrap: "break-word",
         wordWrap: "break-word",
         hyphens: "auto",
       }}
     >
-      {lines}
-      <div>accessToken: ...{sessionStorage.accessToken.slice(-12)}</div>
-      <div>refreshToken: ...{localStorage.refreshToken.slice(-12)}</div>
+      {/* {lines} */}
+      <div>accessToken:</div>
+      <div style={{ textIndent: "50px" }}>
+        ...{sessionStorage.accessToken.slice(-12)}
+      </div>
+      <div>refreshToken:</div>
+      <div style={{ textIndent: "50px" }}>
+        ...{localStorage.refreshToken.slice(-12)}
+      </div>
     </div>
   );
 }

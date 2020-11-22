@@ -1,3 +1,43 @@
+#loadingScreen {
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* padding-bottom: 100px; */
+}
+
+.loadingBar {
+  position: relative;
+  height: 20px;
+  border-radius: 2px;
+  width: 200px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.8);
+}
+.loadingBar::after {
+  content: "";
+  position: absolute;
+  margin-top: 2px;
+  margin-left: 2px;
+  height: 16px;
+  width: 196px;
+  border-radius: inherit;
+  background: linear-gradient(rgb(117, 195, 255), rgb(0, 122, 215));
+  animation: loading 1s;
+  transform-origin: left;
+}
+
+@keyframes loading {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
 #spinnerWrapper {
   position: fixed;
   width: 100%;

@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import UserService from "../../Shared/UserService";
-import toast from "../../Components/Alert/Toast";
-import Spinner from "../../Components/Spinner/Spinner";
+import { unToast, toast } from "../../Components/Alert/Toast";
+import Spinner from "../../Components/Loading/Spinner";
 import { AuthContext } from "../../Contexts/AuthContext";
 
 export default function Login({ goToSignup }) {
@@ -14,22 +14,22 @@ export default function Login({ goToSignup }) {
     password: "",
   });
 
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   const handleLogin = async (event) => {
     event.preventDefault();
-    setLoading(true);
     if (!(userData.password.length > 0 && userData.email.length > 0)) {
       toast(400, "Please enter both fields.");
     } else {
-      await userService.login(userData).then((response) => {
-        if (response === 200) {
-          setAuth(true);
-          toast(200, response);
-        } else if (response === 401) {
-          toast(401, "Wrong password.");
-        } else if (response === 403) {
-          toast(403, "No user with that email.");
+      await userService.login(userData).then((auth) => {
+        if (auth) {
+          setLoading(true);
+          unToast();
+          setAuth(auth);
         } else {
-          toast(400, "Unkown error.");
+          toast(401, "Incorrect login details.");
         }
       });
     }

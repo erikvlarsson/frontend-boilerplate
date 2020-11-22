@@ -2,7 +2,7 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import AlertBox from "./AlertBox";
 
-export default function alertBox(statusCode = 200, message, duration = 6000) {
+export const toast = (statusCode = 200, message, duration = 6000) => {
   try {
     const alertContainer = document.getElementById("alert");
     unmountComponentAtNode(document.getElementById("alert"));
@@ -25,11 +25,15 @@ export default function alertBox(statusCode = 200, message, duration = 6000) {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 const hideAlert = (id) => {
   const alertBox = document.getElementById(id);
   if (alertBox) {
     unmountComponentAtNode(document.getElementById("alert"));
   }
+};
+
+export const unToast = () => {
+  unmountComponentAtNode(document.getElementById("alert"));
 };

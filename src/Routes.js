@@ -2,12 +2,13 @@ import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Home from "./Pages/Home";
 import Another from "./Pages/Another";
+import Spinner from "./Components/Loading/Spinner";
 import Authentication from "./Pages/Authentication/Authentication";
 
-export default function Routes({ auth }) {
-  if (!auth) {
+export default function Routes({ auth, hasLoaded }) {
+  if (!auth && hasLoaded) {
     return <Authentication />;
-  } else {
+  } else if (auth && hasLoaded) {
     return (
       <BrowserRouter>
         <Switch>
@@ -16,5 +17,7 @@ export default function Routes({ auth }) {
         </Switch>
       </BrowserRouter>
     );
+  } else {
+    return <Spinner />;
   }
 }

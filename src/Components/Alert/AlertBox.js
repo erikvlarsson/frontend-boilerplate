@@ -34,7 +34,7 @@ export default function AlertBox({
   }
   return (
     <div id={id} className={"alertBox"} style={{ opacity: opacity }}>
-      <div
+      {/* <div
         style={{
           marginRight: "18px",
           fontSize: "20px",
@@ -43,11 +43,12 @@ export default function AlertBox({
         }}
       >
         {statusIcon}
-      </div>
+      </div> */}
       <div
         style={{ marginRight: "10px", display: "flex", alignItems: "center" }}
       >
-        {statusCode}: {message}
+        {/* {statusCode}: */}
+        {msg}
       </div>
       <div
         className="iconButton"

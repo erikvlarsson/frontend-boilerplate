@@ -7,8 +7,11 @@ export class AuthContextProvider extends Component {
     this.state = {
       auth: false,
     };
+
+    this.setAuth = this.setAuth.bind(this);
   }
-  setAuth = (bool) => {
+
+  setAuth = async (bool) => {
     this.setState({
       auth: bool,
     });
