@@ -11,7 +11,6 @@ function AppMain() {
   useEffect(() => {
     if (!hasLoaded) {
       const userService = new UserService();
-          setAuth(true);
       userService.getRefreshToken().then((auth) => {
         setAuth(auth).then(() => {
           if (auth) {
