@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
-import UserService from "../Shared/UserService";
+import UserService from "../Shared/AuthService";
 export const UserContext = createContext(null);
 
 export const UserContextProvider = ({ children }) => {

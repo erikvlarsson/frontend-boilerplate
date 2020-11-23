@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import LoadingScreen from "../../Components/Loading/LoadingScreen";
-import UserService from "../../Shared/UserService";
+import AuthService from "../../Shared/AuthService";
 import { toast } from "../../Components/Alert/Toast";
 import { AuthContext } from "../../Contexts/AuthContext";
 
@@ -17,7 +17,7 @@ export default function Signup({ goToLogin }) {
     return () => {};
   }, []);
 
-  const userService = new UserService();
+  const authService = new AuthService();
   const handleSignup = (event) => {
     event.preventDefault();
     if (
@@ -29,7 +29,7 @@ export default function Signup({ goToLogin }) {
     ) {
       toast(400, "Please enter all fields.");
     } else {
-      userService.signup(userData).then((registered) => {
+      authService.signup(userData).then((registered) => {
         if (registered) {
           setLoading(true);
           setTimeout(() => {

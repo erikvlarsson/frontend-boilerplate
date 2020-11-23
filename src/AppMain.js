@@ -1,8 +1,8 @@
-import { useEffect, useState, useContext } from "react";
-import UserService from "./Shared/UserService";
+import { useContext } from "react";
 import Routes from "./Routes";
 import LoadingScreen from "./Components/Loading/LoadingScreen";
 import { AuthContext } from "./Contexts/AuthContext";
+import { UserContextProvider } from "./Contexts/UserContext";
 
 function AppMain() {
   const { hasLoaded, auth } = useContext(AuthContext);
@@ -12,7 +12,9 @@ function AppMain() {
   } else {
     return (
       <div className="App">
-        <Routes auth={auth} hasLoaded={hasLoaded} />
+        <UserContextProvider>
+          <Routes auth={auth} hasLoaded={hasLoaded} />
+        </UserContextProvider>
         <div id="alert" />
       </div>
     );

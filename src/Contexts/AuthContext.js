@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
-import UserService from "../Shared/UserService";
+import AuthService from "../Shared/AuthService";
 export const AuthContext = createContext(null);
 
 export const AuthContextProvider = ({ children }) => {
@@ -18,9 +18,10 @@ export const AuthContextProvider = ({ children }) => {
 
   // Authentication when app launches
   useEffect(() => {
+    console.log("authUseEffect");
     if (!hasLoaded) {
-      const userService = new UserService();
-      userService
+      const authService = new AuthService();
+      authService
         .getRefreshToken()
         .then((auth) => {
           setAuth(auth).then(() => {
@@ -39,12 +40,15 @@ export const AuthContextProvider = ({ children }) => {
           });
         });
     }
-  });
+    // without the following line, useEffect is called twice.
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         hasLoaded: hasLoaded,
+        setAuth: setAuth,
         auth: authenticated,
         logout: logout,
       }}

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import UserService from "../../Shared/UserService";
+import AuthService from "../../Shared/AuthService";
 import { unToast, toast } from "../../Components/Alert/Toast";
 import Spinner from "../../Components/Loading/Spinner";
 import { AuthContext } from "../../Contexts/AuthContext";
@@ -8,7 +8,7 @@ export default function Login({ goToSignup }) {
   const { setAuth } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
-  const userService = new UserService();
+  const authService = new AuthService();
   const [userData, setUserData] = useState({
     email: localStorage.email,
     password: "",
@@ -23,7 +23,7 @@ export default function Login({ goToSignup }) {
     if (!(userData.password.length > 0 && userData.email.length > 0)) {
       toast(400, "Please enter both fields.");
     } else {
-      await userService.login(userData).then((auth) => {
+      await authService.login(userData).then((auth) => {
         if (auth) {
           setLoading(true);
           unToast();
