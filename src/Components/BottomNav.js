@@ -3,7 +3,7 @@ import { AiOutlineLogout, AiOutlineUser } from "react-icons/ai";
 import { AuthContext } from "../Contexts/AuthContext";
 
 export default function Footer() {
-  const { setAuth } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
 
   return (
     <nav id="bottomNav">
@@ -18,7 +18,7 @@ export default function Footer() {
           <AiOutlineUser />
         </div>
       </div>
-      <input type="text" />
+      {/* <input type="text" /> */}
       <div
         style={{
           flex: 1,
@@ -27,7 +27,7 @@ export default function Footer() {
           justifyContent: "flex-end",
         }}
       >
-        <div className="navButton" onClick={() => setAuth(false)}>
+        <div className="navButton" onClick={() => logout()}>
           <AiOutlineLogout />
         </div>
       </div>

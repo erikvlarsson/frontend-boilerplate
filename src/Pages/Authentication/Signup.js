@@ -83,7 +83,7 @@ export default function Signup({ goToLogin }) {
               className={className}
               onChange={handleWrite}
             />
-            <button type="submit" className={className + " greenButton"}>
+            <button type="submit" className={className + " altButton"}>
               Sign Up
             </button>
             <div
@@ -96,7 +96,9 @@ export default function Signup({ goToLogin }) {
                 style={{
                   padding: 5,
                   cursor: "pointer",
-                  color: "rgb(93, 145, 255)",
+                  color: "rgb(135, 188, 199)",
+                  textShadow: "0 -.5px 1px rgba(0,0,0,0.8)",
+                  fontWeight: 600,
                 }}
               >
                 Login

@@ -13,18 +13,20 @@
   height: 20px;
   border-radius: 2px;
   width: 200px;
-  background: rgba(255, 255, 255, 0.4);
-  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.8);
+  box-sizing: auto;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.6), 0 1px 3px black;
 }
+
 .loadingBar::after {
   content: "";
   position: absolute;
-  margin-top: 2px;
-  margin-left: 2px;
-  height: 16px;
-  width: 196px;
+  height: inherit;
+  width: inherit;
   border-radius: inherit;
   background: linear-gradient(rgb(117, 195, 255), rgb(0, 122, 215));
+  box-shadow: inset 0 4px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -4px 4px rgba(0, 0, 0, 0.5);
   animation: loading 1s;
   transform-origin: left;
 }

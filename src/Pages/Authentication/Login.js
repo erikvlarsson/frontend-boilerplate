@@ -70,7 +70,7 @@ export default function Login({ goToSignup }) {
               className={className}
               onChange={handleWrite}
             />
-            <button type="submit" className={className + " purpleButton"}>
+            <button type="submit" className={className + " mainButton"}>
               Log in
             </button>
             <div className={className} style={{ textAlign: "center" }}>
@@ -80,7 +80,7 @@ export default function Login({ goToSignup }) {
             <button
               onClick={goToSignup}
               style={{ width: "70%", alignSelf: "center" }}
-              className={className + " greenButton"}
+              className={className + " altButton"}
             >
               Sign up
             </button>

@@ -5,23 +5,7 @@ import LoadingScreen from "./Components/Loading/LoadingScreen";
 import { AuthContext } from "./Contexts/AuthContext";
 
 function AppMain() {
-  const { auth, setAuth } = useContext(AuthContext);
-  const [hasLoaded, setHasLoaded] = useState(false);
-
-  useEffect(() => {
-    if (!hasLoaded) {
-      const userService = new UserService();
-      userService.getRefreshToken().then((auth) => {
-        setAuth(auth).then(() => {
-          if (auth) {
-            setTimeout(() => setHasLoaded(true), 1500);
-          } else {
-            setHasLoaded(true);
-          }
-        });
-      });
-    }
-  }, [hasLoaded, setAuth, setHasLoaded]);
+  const { hasLoaded, auth } = useContext(AuthContext);
 
   if (!hasLoaded) {
     return <LoadingScreen />;

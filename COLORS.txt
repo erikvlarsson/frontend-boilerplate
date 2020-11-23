@@ -1,0 +1,1 @@
+BLUE: background: linear-gradient(rgb(117, 195, 255), rgb(0, 122, 215));
