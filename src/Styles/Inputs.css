@@ -28,3 +28,7 @@ input[type="text"]:focus::placeholder,
 input[type="password"]:focus::placeholder {
   color: rgba(0, 0, 0, 0.25);
 }
+
+textarea {
+  resize: none;
+}

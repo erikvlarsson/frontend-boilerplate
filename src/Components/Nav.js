@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { BsThreeDotsVertical, BsPencil } from "react-icons/bs";
 import { NavLink as Link } from "react-router-dom";
 import MenuList from "./MenuList";
 
@@ -29,10 +29,10 @@ export default function SloppyNav() {
           </Link>
           <Link
             className="navButton"
-            to="/profile"
+            to="/blog"
             activeClassName={"navButton-active"}
           >
-            <AiOutlineUser />
+            <BsPencil />
           </Link>
         </div>
         {/* <input type="text" /> */}
@@ -44,6 +44,13 @@ export default function SloppyNav() {
             justifyContent: "flex-end",
           }}
         >
+          <Link
+            className="navButton"
+            to="/profile"
+            activeClassName={"navButton-active"}
+          >
+            <AiOutlineUser />
+          </Link>
           <div className="navButton" onClick={toggleMenuList}>
             <BsThreeDotsVertical />
           </div>
