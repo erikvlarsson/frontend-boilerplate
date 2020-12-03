@@ -15,7 +15,7 @@ function AppMain() {
         <UserContextProvider>
           <Routes auth={auth} hasLoaded={hasLoaded} />
         </UserContextProvider>
-        <div id="alert" />
+        <section id="alert" />
       </div>
     );
   }

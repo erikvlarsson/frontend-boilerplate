@@ -1,6 +1,12 @@
 import React, { useState } from "react";
-import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
-import { BsThreeDotsVertical, BsPencil } from "react-icons/bs";
+import {
+  FaRunning,
+  FaEllipsisV,
+  FaPencilAlt,
+  FaUser,
+  FaSignal,
+  FaPlusSquare,
+} from "react-icons/fa";
 import { NavLink as Link } from "react-router-dom";
 import MenuList from "./MenuList";
 
@@ -10,53 +16,56 @@ export default function SloppyNav() {
     setMenuListOpen(!menuListOpen);
   };
   return (
-    <>
-      <header>
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            alignItems: "center",
-          }}
+    <header>
+      <div>
+        <Link
+          className="navButton"
+          to="/stats"
+          activeClassName={"navButton-active"}
         >
-          <Link
-            className="navButton"
-            to="/"
-            exact
-            activeClassName={"navButton-active"}
-          >
-            <AiOutlineHome />
-          </Link>
-          <Link
+          <FaSignal style={{ transform: "rotate(90deg) scaleX(-1)" }} />
+        </Link>
+        {/* <Link
             className="navButton"
             to="/blog"
             activeClassName={"navButton-active"}
           >
-            <BsPencil />
-          </Link>
-        </div>
-        {/* <input type="text" /> */}
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-          }}
-        >
-          <Link
+            <FaPencilAlt />
+          </Link> */}
+      </div>
+      <div style={{ justifyContent: "center" }}>
+        {/* <Link
             className="navButton"
-            to="/profile"
+            to="/exercise"
             activeClassName={"navButton-active"}
           >
-            <AiOutlineUser />
-          </Link>
-          <div className="navButton" onClick={toggleMenuList}>
-            <BsThreeDotsVertical />
-          </div>
+            <FaRunning />
+          </Link> */}
+        <Link
+          className="navButton"
+          to="/input"
+          activeClassName={"navButton-active"}
+        >
+          <FaPlusSquare />
+        </Link>
+      </div>
+      <div
+        style={{
+          justifyContent: "flex-end",
+        }}
+      >
+        <Link
+          className="navButton"
+          to="/profile"
+          activeClassName={"navButton-active"}
+        >
+          <FaUser />
+        </Link>
+        <div className="navButton" onClick={toggleMenuList}>
+          <FaEllipsisV />
         </div>
-      </header>
+      </div>
       <MenuList visible={menuListOpen} />
-    </>
+    </header>
   );
 }

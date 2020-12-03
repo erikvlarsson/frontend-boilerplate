@@ -2,8 +2,15 @@
   display: flex;
   flex-direction: column;
   background: #282c34;
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
+}
+.App > div {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  border: 1px dotted grey;
+  height: 100%;
 }
 
 header {
@@ -54,4 +61,10 @@ form {
   background: rgba(255, 255, 255, 0.05);
   box-shadow: inset 0 0 1px grey;
   color: #fff;
+}
+
+header > div {
+  display: flex;
+  align-items: center;
+  flex: 1;
 }
